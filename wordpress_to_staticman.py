@@ -16,6 +16,13 @@ for item in cfg['rss']['channel']['item']:
         for comment in item['wp:comment']:
             total_count += 1
             try:
+                date_time = comment['wp:comment_date_gmt']
+                pattern = '%Y-%m-%d %H:%M:%S'
+                epoch = int(time.mktime(time.strptime(date_time, pattern)))
+                print "Comment File Name: comment-" + str(epoch) + ".yml"
+            except:
+                pass
+            try:
                 print "_id: " + comment['wp:comment_id']
             except:
                 pass
@@ -29,7 +36,11 @@ for item in cfg['rss']['channel']['item']:
             except:
                 pass
             try:
-                m.update(comment['wp:comment_author_email'])
+                temp_email = comment['wp:comment_author_email']
+                temp_email = temp_email.strip()
+                temp_email = temp_email.lower()
+                m.update(temp_email)
+
                 print "email: " + m.hexdigest()
             except:
                 pass
@@ -39,10 +50,6 @@ for item in cfg['rss']['channel']['item']:
                 pass
             try:
                 print "date: " + comment['wp:comment_date_gmt']
-                date_time = comment['wp:comment_date_gmt']
-                pattern = '%Y-%m-%d %H:%M:%S'
-                epoch = int(time.mktime(time.strptime(date_time, pattern)))
-                print "Epoch: " + str(epoch)
             except:
                 pass
             print ""
