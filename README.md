@@ -1,4 +1,5 @@
-# wordpress_to_staticman_comments
+### Wordpress to Staticman Comments
+
 This is a rough script to convert Wordpress comments to staticman comments
 
 This script uses the XML export from Wordpress to convert comments to YAML format.
